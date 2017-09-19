@@ -4,6 +4,7 @@ class CreateWorks < ActiveRecord::Migration[5.1]
       t.string :title
       t.string :description
       t.integer :category_id
+      t.integer :user_id
 
       t.timestamps
     end

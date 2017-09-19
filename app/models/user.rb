@@ -13,6 +13,9 @@ class User < ApplicationRecord
   	has_attached_file :avatar
     validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\z/
 
+    has_many :works
+    has_many :categories, through: :works
+
 	has_secure_password
 
 
