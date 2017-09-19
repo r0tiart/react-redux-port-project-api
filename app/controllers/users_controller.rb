@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
 	def index
-		@user = User.all.collect{|user| user.username}
-		render json: @user
+		@users = User.all.collect{|user| {username: user.username}}
+		render json: @users
 	end
 
 
@@ -16,7 +16,7 @@ class UsersController < ApplicationController
 
 	def show
 		@user = User.find_by(id: params[:id])
-		render json: @user
+		render json: [ {username: @user.username, email: @user.email, avatar: @user.avatar}]
 	end
 
 	def update
