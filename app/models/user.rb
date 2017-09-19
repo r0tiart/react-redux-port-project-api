@@ -11,4 +11,19 @@ class User < ApplicationRecord
   	has_many :followers, through: :passive_relationships, source: :follower
 
 	has_secure_password
+
+
+  def follow(other_user)
+    following << other_user
+  end
+
+  # Unfollows a user.
+  def unfollow(other_user)
+    following.delete(other_user)
+  end
+
+  # Returns true if the current user is following the other user.
+  def following?(other_user)
+    following.include?(other_user)
+  end
 end
