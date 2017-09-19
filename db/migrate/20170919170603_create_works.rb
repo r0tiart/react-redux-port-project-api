@@ -5,6 +5,7 @@ class CreateWorks < ActiveRecord::Migration[5.1]
       t.string :description
       t.integer :category_id
       t.integer :user_id
+      t.boolean :show_attribute, :default => false 
 
       t.timestamps
     end

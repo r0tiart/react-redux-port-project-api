@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :patterns
   resources :categories
   resources :works
   resources :relationships
