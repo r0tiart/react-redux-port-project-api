@@ -10,7 +10,7 @@ class User < ApplicationRecord
     has_many :following, through: :active_relationships, source: :followed
   	has_many :followers, through: :passive_relationships, source: :follower
 
-  	has_attached_file :avatar
+  	has_attached_file :avatar, default_url: ':style/default.png', styles: { thumb: "100x100>" }
     validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\z/
 
     has_many :works
