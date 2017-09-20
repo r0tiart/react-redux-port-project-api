@@ -40,9 +40,9 @@ ActiveRecord::Schema.define(version: 20170919173628) do
   end
 
   create_table "users", force: :cascade do |t|
-    t.text "username"
-    t.text "password_digest"
-    t.text "email"
+    t.string "username"
+    t.string "password_digest"
+    t.string "email"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "avatar_file_name"

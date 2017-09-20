@@ -9,3 +9,4 @@ class AddAttachmentPatternToPatterns < ActiveRecord::Migration[5.1]
     remove_attachment :patterns, :pattern
   end
 end
+	
