@@ -1,8 +1,7 @@
 class UsersController < ApplicationController
-	skip_before_filter :verify_authenticity_token, :only => [:create]
 
 	def index
-		@users = User.all.collect{|user| {username: user.username}}
+		@users = User.all.collect{|user| {username: user.username, id: user.id}}
 		render json: {users: @users}
 	end
 
