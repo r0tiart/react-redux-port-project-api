@@ -1,7 +1,9 @@
 class UsersController < ApplicationController
+	skip_before_filter :verify_authenticity_token, :only => [:create]
+
 	def index
 		@users = User.all.collect{|user| {username: user.username}}
-		render json: @users
+		render json: {users: @users}
 	end
 
 
@@ -16,7 +18,7 @@ class UsersController < ApplicationController
 
 	def show
 		@user = User.find_by(id: params[:id])
-		render json: [ {username: @user.username, email: @user.email, avatar: @user.avatar}]
+		render json: {username: @user.username, email: @user.email, avatar: @user.avatar}
 	end
 
 	def update
