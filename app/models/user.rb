@@ -3,18 +3,24 @@ class User < ApplicationRecord
                                   foreign_key: "follower_id",
                                   dependent:   :destroy
 
-    has_many :passive_relationships, class_name:  "Relationship",
-                                   foreign_key: "followed_id",
-                                   dependent:   :destroy
+  has_many :passive_relationships, class_name:  "Relationship",
+                                 foreign_key: "followed_id",
+                                 dependent:   :destroy
 
-    has_many :following, through: :active_relationships, source: :followed
-  	has_many :followers, through: :passive_relationships, source: :follower
+  has_many :following, through: :active_relationships, source: :followed
+	has_many :followers, through: :passive_relationships, source: :follower
 
-  	has_attached_file :avatar, default_url: ':style/default.png', styles: { thumb: "100x100>" }
-    validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\z/
+	has_attached_file :avatar, default_url: ':style/default.png', styles: { medium: "300x300>", thumb: "100x100>" }
+  validates_attachment :avatar, presence: true
+  do_not_validate_attachment_file_type :avatar
 
-    has_many :works
-    has_many :categories, through: :works
+  has_many :works
+  has_many :categories, through: :works
+
+  validates :username, presence: true
+  validates :email, uniqueness: true
+  validates :username, uniqueness: { case_sensitive: false }
+
 
 	has_secure_password
 
