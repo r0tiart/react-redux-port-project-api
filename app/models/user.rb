@@ -10,7 +10,7 @@ class User < ApplicationRecord
   has_many :following, through: :active_relationships, source: :followed
 	has_many :followers, through: :passive_relationships, source: :follower
 
-	has_attached_file :avatar, default_url: ':style/default.png', styles: { medium: "300x300>", thumb: "100x100>" }
+	has_attached_file :avatar, styles: { medium: "300x300>", thumb: "100x100>" }
   validates_attachment :avatar, presence: true
   do_not_validate_attachment_file_type :avatar
 
@@ -37,5 +37,13 @@ class User < ApplicationRecord
   # Returns true if the current user is following the other user.
   def following?(other_user)
     following.include?(other_user)
+  end
+
+  def avatar_url
+        avatar.url(:medium)
+  end
+
+  def full_url
+    URI.join(ActionController::Base.asset_host, self.avatar_url)
   end
 end

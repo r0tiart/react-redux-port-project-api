@@ -5,7 +5,9 @@ class SessionsController < ApplicationController
 
 		if @user && @user.authenticate(params[:user][:password])
 			session[:user_id] = @user.id
-			render json: {username: @user.username, email: @user.email, avatar: @user.avatar}
+			render :json => @user.to_json(:only => [:id,:username,:email], :methods => [:full_url])
+
+			# render json: {username: @user.username, email: @user.email, avatar: @user.avatar}
 		end
 	end
 
