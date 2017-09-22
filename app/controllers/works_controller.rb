@@ -4,11 +4,16 @@ class WorksController < ApplicationController
 		if params[:user_id]
 			@user = User.find_by(id: params[:user_id])
 			@works = @user.works
-			render json: @works
 		else	
-			@work = Work.all.select{ |work|  work.show_attribute } 
-			render json: @work
+			@works = Work.all.select{ |work|  work.show_attribute }
 		end
+
+		@json_works = @works.collect{|work| 
+					{ title: work.title, id: work.id, description: work.description, category_id: work.category_id,
+					 user_id: work.user_id, show_attribute: work.show_attribute, avatar: work.avatar_full_url } } 
+
+		render json: @json_works
+
 	end
 
 
@@ -21,7 +26,13 @@ class WorksController < ApplicationController
 
 	def show
 		@work = Work.find_by(id: params[:id])
-		render json: @work
+
+		@work.update(work_params)
+
+   		render :json => @work.to_json(:only => [:id, :title, :description, :category_id, :user_id, :show_attribute], 
+   						:methods => [:full_url])
+   			
+		
 	end
 
 private

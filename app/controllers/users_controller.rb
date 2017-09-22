@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
 
 	def index
-		@users = User.all.collect{|user| {username: user.username, id: user.id, avatar: user.avatar.url}}
+		@users = User.all.collect{ |user| { username: user.username, id: user.id, avatar: user.full_url }}
 		render json: {users: @users}
 	end
 
