@@ -3,8 +3,8 @@ class WorksController < ApplicationController
 
 		if params[:user_id]
 			@user = User.find_by(id: params[:user_id])
-			@work = @user.works.select { |work| work.show_attribute }
-			render json: @work
+			@works = @user.works
+			render json: @works
 		else	
 			@work = Work.all.select{ |work|  work.show_attribute } 
 			render json: @work
