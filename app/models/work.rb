@@ -3,11 +3,11 @@ class Work < ApplicationRecord
 	belongs_to :user
 	has_one :pattern
 
-	has_attached_file :avatar
-  	validates_attachment_content_type :avatar, :default_url => ":style/default.jpg", content_type: /\Aimage\/.*\z/
+    has_attached_file :avatar, :default_url => ":style/default.jpg", styles: { medium: "300x300>", thumb: "100x100>" }  	
 
-  	validates :username, presence: true
-  	validates :email, uniqueness: true
+    validates_attachment_content_type :avatar,  content_type: /\Aimage\/.*\z/
+
+  	validates :title, :description, :category, :user, presence: true
 
   def avatar_url
       avatar.url(:medium)

@@ -9,8 +9,8 @@ class WorksController < ApplicationController
 		end
 
 		@json_works = @works.collect{|work| 
-					{ title: work.title, id: work.id, description: work.description, category_id: work.category_id,
-					 user_id: work.user_id, show_attribute: work.show_attribute, avatar: work.avatar_full_url } } 
+					{ id: work.id, title: work.title, description: work.description, category_id: work.category_id,
+					 user_id: work.user_id, show_attribute: work.show_attribute, avatar_full_url: work.avatar_full_url } } 
 
 		render json: @json_works
 
@@ -27,11 +27,11 @@ class WorksController < ApplicationController
 
 		@work = Work.find_by(id: params[:id])
 
-		@work.update(work_params)
+		if @work.update(work_params)
 
    		render :json => @work.to_json(:only => [:id, :title, :description, :category_id, :user_id, :show_attribute], 
-   						:methods => [:full_url])
-   			
+   						:methods => [:avatar_full_url])
+   		end
 	end
 
 private
