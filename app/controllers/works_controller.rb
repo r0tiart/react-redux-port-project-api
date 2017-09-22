@@ -8,9 +8,8 @@ class WorksController < ApplicationController
 	def create
 	
 		@work = current_user.works.build(work_params)
-		if @work.save
-   			render :json @work
-		end
+
+		
 	end
 
 	def show
