@@ -9,7 +9,7 @@ class WorksController < ApplicationController
 	
 		@work = current_user.works.build(work_params)
 		if @work.save
-   			render :json => @work
+   			render :json @work
 		end
 	end
 
@@ -20,6 +20,6 @@ class WorksController < ApplicationController
 
 private
 	def work_params
-		params.fetch(:work, {}).permit(:title, :description, :category_id, :show_attribute)
+		params.fetch(:work, {}).permit(:title, :description, :category_id, :show_attribute, :avatar)
 	end
 end
