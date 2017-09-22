@@ -20,11 +20,11 @@ class WorksController < ApplicationController
 	def create
 	
 		@work = current_user.works.build(work_params)
-
 		
 	end
 
-	def show
+	def update
+
 		@work = Work.find_by(id: params[:id])
 
 		@work.update(work_params)
@@ -32,7 +32,6 @@ class WorksController < ApplicationController
    		render :json => @work.to_json(:only => [:id, :title, :description, :category_id, :user_id, :show_attribute], 
    						:methods => [:full_url])
    			
-		
 	end
 
 private
