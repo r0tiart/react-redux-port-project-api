@@ -21,9 +21,6 @@ class UsersController < ApplicationController
 		render json: {username: @user.username, email: @user.email, avatar: @user.avatar}
 	end
 
-	def update
-	end
-
 private
 	def user_params
 		params.fetch(:user, {}).permit(:username, :password, :avatar, :email)
