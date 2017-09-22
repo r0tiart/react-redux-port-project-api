@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   resources :patterns
-  resources :categories
+  resources :categories, only: [:index]
   resources :works
   resources :relationships
   resources :users do 
