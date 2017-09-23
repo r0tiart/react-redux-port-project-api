@@ -18,8 +18,9 @@ class WorksController < ApplicationController
 
 
 	def create
-	
-		@work = current_user.works.build(work_params)
+		
+		@user = User.find_by(id: params["uid"])
+		@work = @user.works.build(work_params)
 
 		if @work.save
 			render :json => @work.to_json(:only => [:id, :title, :description, :category_id, :user_id, :show_attribute], 
@@ -41,6 +42,6 @@ class WorksController < ApplicationController
 
 private
 	def work_params
-		params.fetch(:work, {}).permit(:title, :description, :category_id, :show_attribute, :avatar, :show_attribute)
+		params.fetch(:work, {}).permit(:title, :description, :category_id, :show_attribute, :avatars)
 	end
 end
