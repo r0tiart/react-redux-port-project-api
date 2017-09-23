@@ -41,6 +41,6 @@ class WorksController < ApplicationController
 
 private
 	def work_params
-		params.fetch(:work, {}).permit(:title, :description, :category_id, :show_attribute, :avatar)
+		params.fetch(:work, {}).permit(:title, :description, :category_id, :show_attribute, :avatar, :show_attribute)
 	end
 end
