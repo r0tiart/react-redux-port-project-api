@@ -20,6 +20,11 @@ class WorksController < ApplicationController
 	def create
 	
 		@work = current_user.works.build(work_params)
+
+		if @work.save
+			render :json => @work.to_json(:only => [:id, :title, :description, :category_id, :user_id, :show_attribute], 
+   									:methods => [:avatar_full_url])
+		end
 		
 	end
 
