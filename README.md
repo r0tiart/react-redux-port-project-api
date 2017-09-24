@@ -1,24 +1,7 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This is the API for my React Redux Portfolio Project
 
-Things you may want to cover:
+The Client side repostiory can be found here: https://github.com/r0tiart/react-redux-port-project-client
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+After Forking and Cloning down repository, please intiate Bundle Install.
