@@ -10,7 +10,7 @@ class WorksController < ApplicationController
 
 		@json_works = @works.collect{|work| 
 					{ id: work.id, title: work.title, description: work.description, category_id: work.category_id,
-					 user_id: work.user_id, show_attribute: work.show_attribute, avatar_full_url: work.avatar_full_url } } 
+					 user_id: work.user_id, vote_count: work.vote_count, show_attribute: work.show_attribute, avatar_full_url: work.avatar_full_url } } 
 
 		render json: @json_works
 
@@ -23,7 +23,7 @@ class WorksController < ApplicationController
 		@work = @user.works.build(work_params)
 
 		if @work.save
-			render :json => @work.to_json(:only => [:id, :title, :description, :category_id, :user_id, :show_attribute], 
+			render :json => @work.to_json(:only => [:id, :title, :description, :category_id, :user_id, :show_attribute, :vote_count], 
    									:methods => [:avatar_full_url])
 		end
 		
@@ -34,14 +34,13 @@ class WorksController < ApplicationController
 		@work = Work.find_by(id: params[:id])
 
 		if @work.update(work_params)
-
-   		render :json => @work.to_json(:only => [:id, :title, :description, :category_id, :user_id, :show_attribute], 
+   		render :json => @work.to_json(:only => [:id, :title, :description, :category_id, :user_id, :show_attribute, :vote_count], 
    						:methods => [:avatar_full_url])
    		end
 	end
 
 private
 	def work_params
-		params.fetch(:work, {}).permit(:title, :description, :category_id, :show_attribute, :avatar)
+		params.fetch(:work, {}).permit(:title, :description, :category_id, :show_attribute, :avatar, :vote_count)
 	end
 end
