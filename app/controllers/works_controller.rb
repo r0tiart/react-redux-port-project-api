@@ -22,6 +22,9 @@ class WorksController < ApplicationController
 		@user = User.find_by(id: params["uid"])
 		@work = @user.works.build(work_params)
 
+		@pattern = @work.build_pattern()
+		@pattern.document = params[:pattern][:document]
+
 		if @work.save
 			render :json => @work.to_json(:only => [:id, :title, :description, :category_id, :user_id, :show_attribute], 
    									:methods => [:avatar_full_url])
