@@ -33,9 +33,8 @@ class WorksController < ApplicationController
 	end
 
 	def update
-
 		@work = Work.find_by(id: params[:id])
-
+		binding.pry
 		if @work.update(work_params)
 
    		render :json => @work.to_json(:only => [:id, :title, :description, :category_id, :user_id, :show_attribute], 
@@ -45,6 +44,6 @@ class WorksController < ApplicationController
 
 private
 	def work_params
-		params.fetch(:work, {}).permit(:title, :description, :category_id, :show_attribute, :avatar)
+		params.fetch(:work, {}).permit(:title, :description, :category_id, :show_attribute, :avatar, :pattern)
 	end
 end
