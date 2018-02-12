@@ -23,7 +23,7 @@ class WorksController < ApplicationController
 		@work = @user.works.build(work_params)
 
 		@pattern = @work.build_pattern()
-		@pattern.document = params[:pattern][:document]
+		@pattern.pattern = params[:pattern]
 
 		if @work.save
 			render :json => @work.to_json(:only => [:id, :title, :description, :category_id, :user_id, :show_attribute], 
@@ -34,16 +34,16 @@ class WorksController < ApplicationController
 
 	def update
 		@work = Work.find_by(id: params[:id])
-
+		binding.pry
 		if !!@work.pattern
-			@work.pattern.document = work_params[:pattern]
+			@work.pattern.pattern = work_params[:pattern]
 		else 
-						binding.pry
 
-			@pattern = Pattern.new() 
+			@pattern = @work.build_pattern()
 
-			@pattern.document = work_params[:pattern]
+			@pattern.pattern = work_params[:pattern]
 
+			@work.save
 		end
 		if @work.update(work_params)
 
