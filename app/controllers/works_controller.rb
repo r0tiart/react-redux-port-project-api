@@ -34,7 +34,6 @@ class WorksController < ApplicationController
 
 	def update
 		@work = Work.find_by(id: params[:id])
-		binding.pry
 		if !!@work.pattern
 			@work.pattern.pattern = work_params[:pattern]
 		else 
