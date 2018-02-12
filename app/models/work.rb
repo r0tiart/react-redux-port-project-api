@@ -16,4 +16,8 @@ class Work < ApplicationRecord
   def avatar_full_url
     URI.join(ActionController::Base.asset_host, self.avatar_url)
   end
+
+  def pattern_full_url
+    URI.join(ActionController::Base.asset_host, self.pattern_url)
+  end
 end

@@ -34,7 +34,17 @@ class WorksController < ApplicationController
 
 	def update
 		@work = Work.find_by(id: params[:id])
-		binding.pry
+
+		if !!@work.pattern
+			@work.pattern.document = work_params[:pattern]
+		else 
+						binding.pry
+
+			@pattern = Pattern.new() 
+
+			@pattern.document = work_params[:pattern]
+
+		end
 		if @work.update(work_params)
 
    		render :json => @work.to_json(:only => [:id, :title, :description, :category_id, :user_id, :show_attribute], 
